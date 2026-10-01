@@ -5,7 +5,7 @@ from langchain_groq import ChatGroq
 
 from hybrid_search import reciprocal_rank_fusion
 from ingest import get_chunks, get_vector_db
-from keyword_search import Keyword_search
+from keyword_search import KeywordSearch
 from reranker import Reranker
 from schema.MetaDataFiltering import MetaDataFiltering
 
@@ -35,22 +35,22 @@ def main():
         MetaDataFiltering,
         method="json_schema"
     )    
-    result_meta_data = structure_meta_data.invoke(user_input)
-    print(result_meta_data)
-    
+    result_meta_data = structure_meta_data.invoke(user_input)    
     city = result_meta_data.city      
     category = result_meta_data.category
 
     chunks = get_chunks()
-    keywords = Keyword_search(chunks)
+    keywords = KeywordSearch(chunks)
     keyword_results = keywords.search(
         user_input,
-        k=3
+        k=10,
+        city=city,
+        category=category
     )
 
     results = vector_db.similarity_search_with_score(
                 user_input,
-                k=3,
+                k=10,
                 filter={
                     "$and": [
                         {"city": city},
@@ -85,6 +85,8 @@ def main():
         document.page_content
         for document in reranked_results
     )
+
+    print(context)
 
     # prompt = ChatPromptTemplate.from_messages([
     #     (
