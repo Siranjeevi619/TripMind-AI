@@ -27,6 +27,10 @@ def process_ingest():
     loader = TextLoader("knowledge/Tokyo.txt", encoding="utf-8")
     documents = loader.load()
 
+    for document in documents:
+        document.metadata["city"] = "Tokyo"
+        document.metadata["category"] = "place"
+
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=200,
         chunk_overlap=40
