@@ -58,6 +58,25 @@ def get_vector_db():
 
     return vector_db
 
+def get_chunks():
+    loader = TextLoader(
+        "knowledge/Tokyo.txt",
+        encoding="utf-8"
+    )
+
+    documents = loader.load()
+
+    for document in documents:
+        document.metadata["city"] = "Tokyo"
+        document.metadata["category"] = "place"
+
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=200,
+        chunk_overlap=40
+    )
+
+    return splitter.split_documents(documents)
+
 
 if __name__ == "__main__":
     process_ingest()

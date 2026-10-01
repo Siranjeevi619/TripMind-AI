@@ -1,10 +1,12 @@
 import os
 
 from dotenv import load_dotenv
-from langchain_core.prompts import ChatPromptTemplate
 from langchain_groq import ChatGroq
 
-from ingest import get_vector_db
+from hybrid_search import reciprocal_rank_fusion
+from ingest import get_chunks, get_vector_db
+from keyword_search import Keyword_search
+from reranker import Reranker
 from schema.MetaDataFiltering import MetaDataFiltering
 
 load_dotenv()
@@ -39,35 +41,50 @@ def main():
     city = result_meta_data.city      
     category = result_meta_data.category
 
+    chunks = get_chunks()
+    keywords = Keyword_search(chunks)
+    keyword_results = keywords.search(
+        user_input,
+        k=3
+    )
+
     results = vector_db.similarity_search_with_score(
-            user_input,
-            k=3,
-            fetch_k = 10,
-            lambda_mult=0.5,
-            filter={
-                "$and": [
-                    {"city": city},
-                    {"category": category}
-                ]
-            }
+                user_input,
+                k=3,
+                filter={
+                    "$and": [
+                        {"city": city},
+                        {"category": category}
+                    ]
+                }
         )
+    
+    vector_documents = [document for document, _ in results]
 
-    threshold = 0.8
+    hybrid_results = reciprocal_rank_fusion(
+        vector_documents,
+        keyword_results
+    )
 
-    relevant_results = [
-        (document, score)
-        for document, score in results
-        if score <= threshold
-    ]
+    reranker = Reranker()
 
-    if not relevant_results:
+    reranked_results = reranker.rerank(
+        user_input,
+        hybrid_results[:10]
+    )
+
+    for document in reranked_results:
+        print("\n---")
+        print(document.page_content)
+
+    if not reranked_results:
         print("I don't have enough information in my knowledge base.")
         return
 
-    # context = "\n\n".join(
-    #     document.page_content
-    #     for document in results
-    # )
+    context = "\n\n".join(
+        document.page_content
+        for document in reranked_results
+    )
 
     # prompt = ChatPromptTemplate.from_messages([
     #     (

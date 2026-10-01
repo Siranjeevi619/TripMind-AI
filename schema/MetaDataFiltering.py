@@ -1,6 +1,8 @@
+from typing import Literal
+
 from pydantic import BaseModel
 
 
 class MetaDataFiltering(BaseModel):
     city: str
-    category: str
+    category: Literal["place", "event", "food"] = "place"
