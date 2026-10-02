@@ -8,6 +8,7 @@ from hybrid_search import reciprocal_rank_fusion
 from ingest import get_chunks, get_vector_db
 from keyword_search import KeywordSearch
 from reranker import Reranker
+from query_rewriter import QueryRewriter
 
 
 def load_dataset():
@@ -86,16 +87,21 @@ def retrieve(question):
 
     vector_db = get_vector_db()
     chunks = get_chunks()
+    rewriter = QueryRewriter()
+
 
     keyword_retriever = KeywordSearch(chunks)
+    print(question)
+    rewritten_question = rewriter.rewrite(question)
+    print(rewritten_question)
 
     vector_results = vector_db.similarity_search(
-        question,
+        rewritten_question,
         k=5
     )
 
     keyword_results = keyword_retriever.search(
-        question,
+        rewritten_question,
         k=5
     )
 
