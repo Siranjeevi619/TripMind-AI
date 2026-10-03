@@ -7,7 +7,7 @@ from hybrid_search import reciprocal_rank_fusion
 from ingest import get_chunks, get_vector_db
 from keyword_search import KeywordSearch
 from reranker import Reranker
-from schema.MetaDataFiltering import MetaDataFiltering
+from schema.meta_data_filtering import MetaDataFiltering
 
 load_dotenv()
 

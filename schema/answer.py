@@ -1,6 +1,5 @@
-from dataclasses import Field
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Answer(BaseModel):
@@ -10,4 +9,8 @@ class Answer(BaseModel):
 
     grounded : bool = Field(
         description="Whether the answer is supported by the provided context."
+    )
+
+    sources: list[str] = Field(
+        description="Sources from the provided context that support the answer."
     )

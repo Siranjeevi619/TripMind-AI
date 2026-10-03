@@ -59,7 +59,17 @@ class Generator():
             "context": chunks,
         })
 
-        return response.content
+        sources = list({
+            docs.metadata.get("source")
+            for docs in document
+            if  docs.metadata.get("source")
+        })
+
+        return {
+            "answer": response.answer,
+            "grounded": response.grounded,
+            "source": sources,
+        }
 
 def main():
     vector_db = get_vector_db()

@@ -30,6 +30,7 @@ def process_ingest():
     for document in documents:
         document.metadata["city"] = "Tokyo"
         document.metadata["category"] = "place"
+        document.metadata["source"] = "Tokyo Travel Guide"
 
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=200,
@@ -69,6 +70,8 @@ def get_chunks():
     for document in documents:
         document.metadata["city"] = "Tokyo"
         document.metadata["category"] = "place"
+        document.metadata["source"] = "Tokyo Travel Guide"
+
 
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=200,
