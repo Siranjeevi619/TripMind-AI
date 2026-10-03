@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_groq import ChatGroq
 
@@ -7,6 +8,7 @@ from schema.router import QueryRouter
 
 class Routing:
     def __init__(self):
+        load_dotenv()
         groq_model= os.getenv("GROQ_MODEL")
         groq_api_key = os.getenv("GROQ_API_KEY")
 
@@ -37,13 +39,13 @@ class Routing:
             )
         ])
 
-        self.chain = self.prompt | self.model
+        self.chain = self.prompt | self.router
 
     def route(self ,query):
         response  = self.chain.invoke({
             "query": query,
         })
-        return response.content
+        return response.strategy
 
 
 

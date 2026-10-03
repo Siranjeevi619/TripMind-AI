@@ -6,7 +6,7 @@ from reranker import Reranker
 from routing import Routing
 
 
-class AdaptiveSearch:
+class AdaptiveRetriever:
     def __init__(self):
 
         self.technique_router = Routing()
@@ -19,7 +19,7 @@ class AdaptiveSearch:
         self.reranker = Reranker()
 
 
-    def retrieve_queries(self, queries):
+    def     retrieve(self, queries):
         strategy = self.technique_router.route(queries)
         print(strategy)
         if strategy == "vector":
@@ -31,7 +31,7 @@ class AdaptiveSearch:
         elif strategy =="multi_query":
             results = self.multi_query.search(queries)
         else :
-            raise ValueError(f"Strategy must be one of 'vector', 'hybrid', or 'multi_query'. The strategy we got {strategy}")
+            raise ValueError(f"Strategy must be one of 'vector', 'hybrid' or 'multi_query'. The strategy we got {strategy}")
         return self.reranker.rerank(queries, results)
 
 

@@ -49,7 +49,7 @@ class Generator():
         self.chain = self.prompt | self.structured_model
 
     def generate(self, questions, document):
-        chunks = "/n/n".join(
+        chunks = "\n\n".join(
             document.page_content
             for document in document
         )
