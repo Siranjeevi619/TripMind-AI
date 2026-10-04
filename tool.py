@@ -1,5 +1,6 @@
 import os
 
+import requests
 from langchain_core.messages import ToolMessage, HumanMessage, SystemMessage
 from langchain_core.tools import  tool
 from langchain_groq import ChatGroq
@@ -9,30 +10,78 @@ load_dotenv()
 
 @tool
 def get_weather(city: str) -> dict:
-    """Get the current weather for a city."""
+    """
+    Get the current weather for a city using a real weather API.
+    """
 
-    weather_data = {
+    cities = {
         "Tokyo": {
-            "temperature": 24,
-            "condition": "Cloudy"
+            "latitude": 35.6762,
+            "longitude": 139.6503,
         },
         "Paris": {
-            "temperature": 18,
-            "condition": "Sunny"
+            "latitude": 48.8566,
+            "longitude": 2.3522,
         },
         "London": {
-            "temperature": 15,
-            "condition": "Rainy"
+            "latitude": 51.5074,
+            "longitude": -0.1278,
         },
     }
 
-    return weather_data.get(
-        city,
-        {
-            "temperature": 25,
-            "condition": "Unknown"
+    if city not in cities:
+        return {
+            "error": "City coordinates are not found",
         }
-    )
+
+    api_url = os.getenv("WEATHER_API")
+
+    params = {
+        "latitude": cities[city]["latitude"],
+        "longitude": cities[city]["longitude"],
+        "current": "temperature_2m,weather_code",
+    }
+
+    max_retries = int(os.getenv("MAX_RETRIES"))
+    for attempt in range(1, max_retries+1):
+        try:
+            print(f"Weather API attempt {attempt}/{max_retries}")
+            response = requests.get(
+                url=api_url,
+                params=params,
+                timeout=5,
+            )
+            response.raise_for_status()
+
+            data = response.json()
+            current_weather = data["current"]
+
+            return {
+                "city": city,
+                "temperature": current_weather["temperature_2m"],
+                "weather_code": current_weather["weather_code"],
+            }
+
+
+        except requests.RequestException as e:
+            print(
+                f"Weather API failed: {e}"
+            )
+
+            if attempt == max_retries:
+                return {
+                    "success": False,
+                    "error": (
+                        "Weather service is currently "
+                        "unavailable after 3 attempts."
+                    ),
+                }
+    return {
+            "success": False,
+            "error": "Unknown weather service error.",
+        }
+
+
 
 @tool
 def get_places(city: str) -> dict:
@@ -61,15 +110,17 @@ def get_places(city: str) -> dict:
     return places.get(city, ["No places found in the place"])
 
 @tool
-def calculate_budget(days : int , daily_budget:float) -> dict:
-    """Calculate the estimated travel budget based on number of days and daily spending."""
+def calculate_budget(city: str,days: int,travelers: int,daily_budget: float) -> dict:
+    """Calculate the estimated travel budget."""
 
-    total = days * daily_budget
+    total = days * travelers * daily_budget
 
     return {
+        "city": city,
         "days": days,
+        "travelers": travelers,
         "daily_budget": daily_budget,
-        "estimated_total": total,
+        "total_budget": total,
     }
 
 tools = [get_weather, get_places, calculate_budget]
@@ -89,11 +140,16 @@ messages = [
         content="""
         You are a travel assistant.
 
-        When answering using a tool result, use ONLY the information
-        returned by the tool.
+        When the user asks about weather,
+        always use the get_weather tool.
 
-        Do not add places, facts or recommendations from your own
-        knowledge if they were not returned by the tool.
+        Never invent weather information.
+
+        If the weather tool returns an error,
+        clearly tell the user that weather information
+        could not be retrieved.
+
+        Do not make up a replacement weather result.
         """
     ),
     HumanMessage(content=user_question),
@@ -120,7 +176,7 @@ if response.tool_calls :
         )
     final_response = llm_with_tool.invoke(messages)
     print("\nAI:")
-    print(final_response)
+    print(final_response.content)
 else:
     print("\nAI:")
     print(response.content)
