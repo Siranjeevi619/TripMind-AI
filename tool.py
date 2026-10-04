@@ -1,12 +1,13 @@
 import os
 
 import requests
-from langchain_core.messages import ToolMessage, HumanMessage, SystemMessage
-from langchain_core.tools import  tool
-from langchain_groq import ChatGroq
 from dotenv import load_dotenv
+from langchain_core.messages import ToolMessage, HumanMessage, SystemMessage
+from langchain_core.tools import tool
+from langchain_groq import ChatGroq
 
 load_dotenv()
+
 
 @tool
 def get_weather(city: str) -> dict:
@@ -43,7 +44,7 @@ def get_weather(city: str) -> dict:
     }
 
     max_retries = int(os.getenv("MAX_RETRIES"))
-    for attempt in range(1, max_retries+1):
+    for attempt in range(1, max_retries + 1):
         try:
             print(f"Weather API attempt {attempt}/{max_retries}")
             response = requests.get(
@@ -77,15 +78,18 @@ def get_weather(city: str) -> dict:
                     ),
                 }
     return {
-            "success": False,
-            "error": "Unknown weather service error.",
-        }
+        "success": False,
+        "error": "Unknown weather service error.",
+    }
 
+
+from langchain_core.tools import tool
 
 
 @tool
-def get_places(city: str) -> dict:
-    """Get the Popular places for a city"""
+def search_places(city: str) -> dict:
+    """Find popular places to visit in a city."""
+
     places = {
         "Tokyo": [
             "Senso-ji Temple",
@@ -96,60 +100,63 @@ def get_places(city: str) -> dict:
         "Paris": [
             "Eiffel Tower",
             "Louvre Museum",
-            "Notre-Dame Cathedral",
             "Arc de Triomphe",
-        ],
-        "London": [
-            "Big Ben",
-            "Tower of London",
-            "British Museum",
-            "London Eye",
         ],
     }
 
-    return places.get(city, ["No places found in the place"])
+    return {
+        "city": city,
+        "places": places.get(city, []),
+    }
+
 
 @tool
-def calculate_budget(city: str,days: int,travelers: int,daily_budget: float) -> dict:
-    """Calculate the estimated travel budget."""
+def calculate_budget(days: int, travelers: int, daily_budget: float) -> dict:
+    """Calculate the total travel budget."""
 
     total = days * travelers * daily_budget
 
     return {
-        "city": city,
         "days": days,
         "travelers": travelers,
         "daily_budget": daily_budget,
         "total_budget": total,
     }
 
-tools = [get_weather, get_places, calculate_budget]
+
+tools = [get_weather, search_places, calculate_budget]
+
+tools_map = {
+    tool.name: tool
+    for tool in tools
+}
 
 llm = ChatGroq(model=os.getenv("GROQ_MODEL"),
-               api_key= os.getenv("GROQ_API_KEY"), temperature=0.5)
+               api_key=os.getenv("GROQ_API_KEY"), temperature=0.5)
 llm_with_tool = llm.bind_tools(tools)
-tool_map = {
-    "get_places": get_places,
-    "get_weather": get_weather,
-    "calculate_budget": calculate_budget,
-}
-user_question = input("You: ")
+
+user_question = """I'm visiting Tokyo for 5 days with 2 people.
+        My daily budget is $100 per person.
+        Find places to visit, check the weather,
+        and calculate my total budget.
+    """
 
 messages = [
     SystemMessage(
         content="""
         You are a travel assistant.
 
-        When the user asks about weather,
-        always use the get_weather tool.
+        Use the available tools whenever they are needed
+        to answer the user's request.
 
-        Never invent weather information.
+        For places, use search_places.
+        For weather, use get_weather.
+        For budget calculations, use calculate_budget.
 
-        If the weather tool returns an error,
-        clearly tell the user that weather information
-        could not be retrieved.
+        Never invent information that can be obtained from a tool.
 
-        Do not make up a replacement weather result.
+        If a tool returns an error, clearly explain the error
+        and do not fabricate the missing information.
         """
     ),
     HumanMessage(content=user_question),
@@ -158,19 +165,15 @@ messages = [
 response = llm_with_tool.invoke(messages)
 print(f"response tool calling -> {response}")
 messages.append(response)
-if response.tool_calls :
+if response.tool_calls:
     for tool_call in response.tool_calls:
+        tool = tools_map[tool_call["name"]]
 
-        selected_tool = tool_map[
-            tool_call["name"]
-        ]
-        result = selected_tool.invoke(
-            tool_call
-        )
+        result = tool.invoke(tool_call)
 
         messages.append(
             ToolMessage(
-                content=str(result),
+                content=result.content,
                 tool_call_id=tool_call["id"],
             )
         )
