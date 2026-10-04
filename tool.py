@@ -11,10 +11,7 @@ load_dotenv()
 
 @tool
 def get_weather(city: str) -> dict:
-    """
-    Get the current weather for a city using a real weather API.
-    """
-
+    """Get the current weather for a city using a real weather API."""
     cities = {
         "Tokyo": {
             "latitude": 35.6762,
@@ -43,7 +40,7 @@ def get_weather(city: str) -> dict:
         "current": "temperature_2m,weather_code",
     }
 
-    max_retries = int(os.getenv("MAX_RETRIES"))
+    max_retries = int(os.getenv("WEATHER_API_MAX_RETRIES")) | 3
     for attempt in range(1, max_retries + 1):
         try:
             print(f"Weather API attempt {attempt}/{max_retries}")
@@ -81,9 +78,6 @@ def get_weather(city: str) -> dict:
         "success": False,
         "error": "Unknown weather service error.",
     }
-
-
-from langchain_core.tools import tool
 
 
 @tool
@@ -138,8 +132,7 @@ llm_with_tool = llm.bind_tools(tools)
 user_question = """I'm visiting Tokyo for 5 days with 2 people.
         My daily budget is $100 per person.
         Find places to visit, check the weather,
-        and calculate my total budget.
-    """
+        and calculate my total budget."""
 
 messages = [
     SystemMessage(
@@ -161,7 +154,8 @@ messages = [
     ),
     HumanMessage(content=user_question),
 ]
-while True:
+MAX_ITERATIONS = os.getenv("TOOL_MAX_ITERATIONS")
+for i in range(MAX_ITERATIONS):
     response = llm_with_tool.invoke(messages)
     print(f"response tool calling -> {response}")
     messages.append(response)
