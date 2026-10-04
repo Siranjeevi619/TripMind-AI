@@ -161,11 +161,16 @@ messages = [
     ),
     HumanMessage(content=user_question),
 ]
+while True:
+    response = llm_with_tool.invoke(messages)
+    print(f"response tool calling -> {response}")
+    messages.append(response)
 
-response = llm_with_tool.invoke(messages)
-print(f"response tool calling -> {response}")
-messages.append(response)
-if response.tool_calls:
+    if not response.tool_calls:
+        print("\nAI:")
+        print(response.content)
+        break
+
     for tool_call in response.tool_calls:
         tool = tools_map[tool_call["name"]]
 
@@ -180,6 +185,3 @@ if response.tool_calls:
     final_response = llm_with_tool.invoke(messages)
     print("\nAI:")
     print(final_response.content)
-else:
-    print("\nAI:")
-    print(response.content)
