@@ -1,15 +1,27 @@
-from api.schema.Trip import TripRequest, TripResponse
+from agent.agent import run_agent
+from api.schema.trip import TripRequest, TripResponse
 
 
 class TripService:
     def create_trip(self, request: TripRequest) -> TripResponse:
+        prompt = f"""
+                Create a travel plan for:
+
+                Destination: {request.destination}
+                Days: {request.days}
+                Travelers: {request.travelers}
+                Budget: ${request.budget}
+                """
+
+        result = run_agent(prompt)
+
         return TripResponse(
-            trip_id="001",
+            trip_id="demo-123",
             destination=request.destination,
             days=request.days,
             travelers=request.travelers,
             budget=request.budget,
-            status="Created"
+            status="created",
         )
 
 

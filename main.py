@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from fastapi import FastAPI
 
-from api.schema.Trip import TripRequest
+from api.schema.trip import TripRequest
 from service.trip_service import trip_service
 
 # from ingest import get_chunks, get_vector_db

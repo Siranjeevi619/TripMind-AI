@@ -8,6 +8,16 @@ class TripRequest(BaseModel):
     budget: float = Field(gt=0)
 
 
+class DayPlan(BaseModel):
+    day: int
+    activities: list[str]
+
+
+class TripPlan(BaseModel):
+    destination: str
+    itinerary: list[DayPlan]
+
+
 class TripResponse(BaseModel):
     trip_id: str
     destination: str
