@@ -1,6 +1,7 @@
 import os
 
 from dotenv import load_dotenv
+from fastapi import FastAPI
 from langchain_groq import ChatGroq
 
 from hybrid_search import reciprocal_rank_fusion
@@ -34,9 +35,9 @@ def main():
     structure_meta_data = model.with_structured_output(
         MetaDataFiltering,
         method="json_schema"
-    )    
-    result_meta_data = structure_meta_data.invoke(user_input)    
-    city = result_meta_data.city      
+    )
+    result_meta_data = structure_meta_data.invoke(user_input)
+    city = result_meta_data.city
     category = result_meta_data.category
 
     chunks = get_chunks()
@@ -49,16 +50,16 @@ def main():
     )
 
     results = vector_db.similarity_search_with_score(
-                user_input,
-                k=10,
-                filter={
-                    "$and": [
-                        {"city": city},
-                        {"category": category}
-                    ]
-                }
-        )
-    
+        user_input,
+        k=10,
+        filter={
+            "$and": [
+                {"city": city},
+                {"category": category}
+            ]
+        }
+    )
+
     vector_documents = [document for document, _ in results]
 
     hybrid_results = reciprocal_rank_fusion(
@@ -111,6 +112,14 @@ def main():
     # })
 
     # print(response.content)
+
+
+app = FastAPI()
+
+
+@app.get("/health")
+def health():
+    return {"message": "ok"}
 
 
 if __name__ == "__main__":
