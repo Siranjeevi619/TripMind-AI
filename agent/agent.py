@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from langchain_core.messages import SystemMessage, HumanMessage, ToolMessage
 from langchain_groq import ChatGroq
 
+from agent.state import TripState
 from api.schema.trip import TripPlan
 from tools.weather import get_weather
 
@@ -36,7 +37,7 @@ If a tool fails, clearly report the failure.
 """
 
 
-def run_agent(user_question: str) -> TripPlan:
+def run_agent(user_question: str, state: TripState) -> TripPlan:
     messages = [
         SystemMessage(content=SYSTEM_PROMPT),
         HumanMessage(content=user_question),
