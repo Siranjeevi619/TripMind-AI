@@ -30,6 +30,7 @@ class TripService:
             travelers=request.travelers,
             itinerary=result.itinerary,
             budget=request.budget,
+            weather=state.weather,
             status="created",
         )
 

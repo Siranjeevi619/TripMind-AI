@@ -6,11 +6,12 @@ from langchain_groq import ChatGroq
 
 from agent.state import TripState
 from api.schema.trip import TripPlan
+from tools.places import search_places
 from tools.weather import get_weather
 
 load_dotenv()
 
-tools = [get_weather]
+tools = [get_weather, search_places]
 
 tools_map = {
     tool.name: tool
@@ -27,14 +28,14 @@ llm_with_tools = llm.bind_tools(tools)
 structured_llm = llm.with_structured_output(TripPlan)
 
 SYSTEM_PROMPT = """
-You are TripMind, an AI travel assistant.
-
-Use available tools whenever they are needed.
-
-Never invent information that can be obtained from a tool.
-
-If a tool fails, clearly report the failure.
-"""
+        You are TripMind, an AI travel assistant.
+        
+        Use available tools whenever they are needed.
+        
+        Never invent information that can be obtained from a tool.
+        
+        If a tool fails, clearly report the failure.
+    """
 
 
 def run_agent(user_question: str, state: TripState) -> TripPlan:
@@ -57,11 +58,12 @@ def run_agent(user_question: str, state: TripState) -> TripPlan:
         for tool_call in response.tool_calls:
             tool = tools_map[tool_call["name"]]
 
-            result = tool.invoke(tool_call)
+            result = tool.invoke(tool_call["args"])
 
-            for key, value in result.items():
-                if hasattr(state, key):
-                    setattr(state, key, value)
+            if isinstance(result, dict):
+                for key, value in result.items():
+                    if hasattr(state, key):
+                        setattr(state, key, value)
 
             messages.append(
                 ToolMessage(
