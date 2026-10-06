@@ -35,7 +35,7 @@ def get_weather(city: str) -> dict:
         "current": "temperature_2m,weather_code",
     }
 
-    max_retries = int(os.getenv("WEATHER_API_MAX_RETRIES")) | 3
+    max_retries = int(os.getenv("WEATHER_API_MAX_RETRIES", "3"))
     for attempt in range(1, max_retries + 1):
         try:
             print(f"Weather API attempt {attempt}/{max_retries}")
@@ -50,9 +50,11 @@ def get_weather(city: str) -> dict:
             current_weather = data["current"]
 
             return {
-                "city": city,
-                "temperature": current_weather["temperature_2m"],
-                "weather_code": current_weather["weather_code"],
+                "weather": {
+                    "city": city,
+                    "temperature": current_weather["temperature_2m"],
+                    "weather_code": current_weather["weather_code"],
+                }
             }
 
 
@@ -70,6 +72,6 @@ def get_weather(city: str) -> dict:
                     ),
                 }
     return {
-        "success": False,
-        "error": "Unknown weather service error.",
+        "weather": None,
+        "error": "Weather service unavailable"
     }

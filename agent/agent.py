@@ -59,9 +59,13 @@ def run_agent(user_question: str, state: TripState) -> TripPlan:
 
             result = tool.invoke(tool_call)
 
+            for key, value in result.items():
+                if hasattr(state, key):
+                    setattr(state, key, value)
+
             messages.append(
                 ToolMessage(
-                    content=str(result.content),
+                    content=str(result),
                     tool_call_id=tool_call["id"],
                 )
             )
