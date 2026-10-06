@@ -25,16 +25,33 @@ llm = ChatGroq(model=model, api_key=api_key, temperature=0.5)
 
 llm_with_tools = llm.bind_tools(tools)
 
-structured_llm = llm.with_structured_output(TripPlan)
+structured_llm = llm.with_structured_output(TripPlan, method="json_mode")
 
 SYSTEM_PROMPT = """
-        You are TripMind, an AI travel assistant.
-        
-        Use available tools whenever they are needed.
-        
-        Never invent information that can be obtained from a tool.
-        
-        If a tool fails, clearly report the failure.
+    You are TripMind, an AI travel assistant.
+    
+    Use available tools whenever they are needed.
+    
+    Never invent information that can be obtained from a tool.
+    
+    If a tool fails, clearly report the failure.
+    
+    For the final trip plan, return ONLY the fields required by the
+    TripPlan schema:
+    - destination
+    - itinerary
+    
+    The itinerary must contain:
+    - day
+    - activities
+    
+    Do not add fields such as:
+    - days
+    - travelers
+    - budget
+    - accommodation
+    - transport
+    - budget_breakdown
     """
 
 
@@ -71,6 +88,13 @@ def run_agent(user_question: str, state: TripState) -> TripPlan:
                     tool_call_id=tool_call["id"],
                 )
             )
+
+    messages.append(
+        HumanMessage(
+            content="Based on the above information, generate the final trip plan strictly as a JSON object matching the schema."
+        )
+    )
+
     trip_plan = structured_llm.invoke(messages)
 
     return trip_plan
