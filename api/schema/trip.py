@@ -24,4 +24,5 @@ class TripResponse(BaseModel):
     days: int
     travelers: int
     budget: float
+    itinerary: list[DayPlan]
     status: str

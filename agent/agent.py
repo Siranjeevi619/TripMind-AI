@@ -36,13 +36,13 @@ If a tool fails, clearly report the failure.
 """
 
 
-def run_agent(user_question: str, llm_with_tools=None) -> TripPlan:
+def run_agent(user_question: str) -> TripPlan:
     messages = [
         SystemMessage(content=SYSTEM_PROMPT),
         HumanMessage(content=user_question),
     ]
 
-    max_iterations = 10
+    max_iterations = 3
 
     for _ in range(max_iterations):
 
@@ -51,7 +51,7 @@ def run_agent(user_question: str, llm_with_tools=None) -> TripPlan:
         messages.append(response)
 
         if not response.tool_calls:
-            return response.content
+            break
 
         for tool_call in response.tool_calls:
             tool = tools_map[tool_call["name"]]
@@ -60,9 +60,10 @@ def run_agent(user_question: str, llm_with_tools=None) -> TripPlan:
 
             messages.append(
                 ToolMessage(
-                    content=result.content,
+                    content=str(result.content),
                     tool_call_id=tool_call["id"],
                 )
             )
+    trip_plan = structured_llm.invoke(messages)
 
-    return "The agent could not complete the request."
+    return trip_plan

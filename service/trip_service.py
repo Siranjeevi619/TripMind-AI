@@ -17,9 +17,10 @@ class TripService:
 
         return TripResponse(
             trip_id="demo-123",
-            destination=request.destination,
+            destination=result.destination,
             days=request.days,
             travelers=request.travelers,
+            itinerary=result.itinerary,
             budget=request.budget,
             status="created",
         )
