@@ -1,1 +1,7 @@
 .env
+.venv/
+**pycache**/
+*.py[cod]
+.pytest_cache/
+.chroma/
+db/

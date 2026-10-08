@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="98cb7896-2dc4-43bf-a0a2-05c3055c5a7c" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Siranjeevi619"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Siranjeevi619/TripMind-AI.git",
+    "accountId": "1b996e14-4bcf-43ec-ad00-ecd5e3f6572b"
+  }
+}]]></component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0030288303375117" />
+      <entry key="MS500" value="1.7053848187818472" />
+      <entry key="S2" value="5.333078121343538" />
+      <entry key="S5" value="8.403903926336511" />
+      <entry key="S10" value="9.9907564053544" />
+      <entry key="S30" value="11.601832375571721" />
+      <entry key="S60" value="14.135732552858176" />
+      <entry key="M2" value="20.74747323774644" />
+      <entry key="M5" value="49.44072108386508" />
+      <entry key="M10" value="104.99466520083946" />
+      <entry key="M15" value="151.4141468765534" />
+      <entry key="M30" value="234.71718131890458" />
+      <entry key="H1" value="300.55589499207093" />
+      <entry key="H2" value="342.4723135726617" />
+      <entry key="H4" value="366.19592271065403" />
+      <entry key="D1" value="387.54659195637726" />
+      <entry key="W1" value="391.359945790063" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="5.957032266009112E-103" />
+      <entry key="S2" value="2.7781614973249084E-26" />
+      <entry key="S5" value="5.99121177995E-11" />
+      <entry key="S10" value="7.825042857535899E-6" />
+      <entry key="S30" value="0.0324429534287722" />
+      <entry key="S60" value="0.39314228216228697" />
+      <entry key="M2" value="1.5945357495757508" />
+      <entry key="M5" value="5.717264601338784" />
+      <entry key="M10" value="12.719698413149802" />
+      <entry key="M15" value="17.90923264804608" />
+      <entry key="M30" value="26.248368982082606" />
+      <entry key="H1" value="32.24916285458258" />
+      <entry key="H2" value="35.87416327602863" />
+      <entry key="H4" value="37.86998446852816" />
+      <entry key="D1" value="39.63526901497743" />
+      <entry key="W1" value="39.94765178882003" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9621415285172474" />
+      <entry key="MS500" value="1.6904331433733353" />
+      <entry key="S2" value="5.321667650549149" />
+      <entry key="S5" value="8.396834739705705" />
+      <entry key="S10" value="9.986558695942527" />
+      <entry key="S30" value="11.619120807986349" />
+      <entry key="S60" value="14.477927271956311" />
+      <entry key="M2" value="22.265629539421045" />
+      <entry key="M5" value="55.07783583081604" />
+      <entry key="M10" value="117.64057720793755" />
+      <entry key="M15" value="169.2587484451721" />
+      <entry key="M30" value="260.92131570001834" />
+      <entry key="H1" value="332.7787701199696" />
+      <entry key="H2" value="378.3320908489655" />
+      <entry key="H4" value="404.05837463333773" />
+      <entry key="D1" value="427.1805557088776" />
+      <entry key="W1" value="431.30740985579354" />
+    </decayedShown>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4,
+  "fromUser": false
+}]]></component>
+  <component name="ProjectId" id="3KQjN2Vi82xukLieMfTHObrvgu8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "dev-v2",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/home/steve/LLM/tripmind-ai",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "to.speed.mode.migration.done": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-73a66231627c-5bd6d13a2a75-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-262.10968.92" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="98cb7896-2dc4-43bf-a0a2-05c3055c5a7c" name="Changes" comment="" />
+      <created>1791496642628</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1791496642628</updated>
+      <workItem from="1791496643634" duration="2304000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
