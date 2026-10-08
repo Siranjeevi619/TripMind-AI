@@ -1,7 +1,9 @@
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, status
+from sqlalchemy.orm import Session
 
-from api.schema.trip import TripRequest
+from api.schema.trip import TripRequest, TripResponse
+from database.dependencies import get_db
 from service.trip_service import trip_service
 
 # from ingest import get_chunks, get_vector_db
@@ -110,12 +112,41 @@ load_dotenv()
 #     print(response.content)
 
 
-app = FastAPI()
+app = FastAPI(title="TripMind AI")
 
 
-@app.post("/api/v1/trips")
-def create_trips(request: TripRequest):
-    return trip_service.create_trip(request)
+@app.post(
+    "/api/v1/trips",
+    response_model=TripResponse,
+    status_code=status.HTTP_202_ACCEPTED,
+)
+def create_trip(
+        request: TripRequest,
+        background_tasks: BackgroundTasks,
+        db: Session = Depends(get_db),
+):
+    return trip_service.create_trip(
+        db=db,
+        request=request,
+        background_tasks=background_tasks,
+    )
+
+
+@app.get(
+    "/api/v1/trips/{trip_id}",
+    response_model=TripResponse,
+)
+def get_trip(
+        trip_id: int,
+        db: Session = Depends(get_db),
+):
+    trip = trip_service.get_trip(db=db, trip_id=trip_id)
+    if trip is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Trip with id {trip_id} not found",
+        )
+    return trip
 
 
 @app.get("/health")

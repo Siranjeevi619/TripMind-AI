@@ -1,4 +1,3 @@
-from database.connection import SessionLocal
 from database.model import Trip
 
 
@@ -6,31 +5,40 @@ class TripRepository:
 
     def create_trip(
             self,
+            db,
             destination: str,
             days: int,
             travelers: int,
             budget: float,
             status: str,
     ):
-        db = SessionLocal()
+        trip = Trip(
+            destination=destination,
+            days=days,
+            travelers=travelers,
+            budget=budget,
+            status=status,
+        )
 
-        try:
-            trip = Trip(
-                destination=destination,
-                days=days,
-                travelers=travelers,
-                budget=budget,
-                status=status,
-            )
+        db.add(trip)
+        db.flush()
 
-            db.add(trip)
-            db.commit()
-            db.refresh(trip)
+        return trip
 
-            return trip
+    def get_trip(self, db, trip_id: int) -> Trip | None:
+        return db.get(Trip, trip_id)
 
-        finally:
-            db.close()
+    def update_status(self, db, trip_id: int, status: str):
+        trip = db.get(Trip, trip_id)
+
+        if trip is None:
+            raise ValueError(f"Trip {trip_id} not found")
+
+        trip.status = status
+
+        db.flush()
+
+        return trip
 
 
 trip_repository = TripRepository()

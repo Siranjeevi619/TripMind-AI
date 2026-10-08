@@ -23,8 +23,8 @@ class TripResponse(BaseModel):
     destination: str
     days: int
     travelers: int
-    weather: dict | None = None
     budget: float
-    places: list[str] = []
-    itinerary: list[DayPlan] = []
     status: str
+    weather: dict | None = None
+    places: list[str] | None = None
+    itinerary: list[DayPlan] | None = None
