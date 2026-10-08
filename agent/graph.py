@@ -58,35 +58,54 @@ SYSTEM_PROMPT = """
 
 
 def final_planner_node(state: TripState):
-    prompt = f"""
-        Create the final travel itinerary.
-        
-        Destination: {state.destination}
-        Days: {state.days}
-        Travelers: {state.travelers}
-        Budget: {state.budget}
-        
-        Weather:
-        {state.weather}
-        
-        Places:
-        {state.places}
-        
-        Rules:
-        
-        1. Create exactly {state.days} DayPlan objects.
-        2. Each day must have the correct day number:
-           Day 1, Day 2, ..., Day {state.days}.
-        3. Every day must contain at least one activity.
-        4. Use the available places when creating the itinerary.
-        5. Do not invent places that are not provided.
-        """
+    max_retries = 3
 
-    result = structured_llm.invoke(prompt)
+    for attempt in range(1, max_retries + 1):
+        prompt = f"""
+                Create the final travel itinerary.
+                
+                Destination: {state.destination}
+                Days: {state.days}
+                Travelers: {state.travelers}
+                Budget: {state.budget}
+                
+                Weather:
+                {state.weather}
+                
+                Places:
+                {state.places}
+                
+                Rules:
+                
+                1. Create exactly {state.days} DayPlan objects.
+                2. Day numbers must be 1 through {state.days}.
+                3. Every day must contain at least one activity.
+                4. Use the available places.
+                5. Do not invent places that are not provided.
+                """
 
-    return {
-        "itinerary": result.itinerary
-    }
+        try:
+            result = structured_llm.invoke(prompt)
+
+            validate_trip_plan(
+                result,
+                expected_days=state.days
+            )
+
+            print(f"Validation successful on attempt {attempt}")
+
+            return {
+                "itinerary": result.itinerary
+            }
+
+        except ValueError as error:
+            print(f"Validation failed on attempt {attempt}: {error}")
+
+            if attempt == max_retries:
+                raise ValueError(
+                    "Unable to generate a valid travel plan "
+                    "after maximum retries."
+                )
 
 
 def agent_node(state: TripState):
@@ -175,6 +194,27 @@ def should_continue(state: TripState):
         return "tools"
 
     return "end"
+
+
+def validate_trip_plan(plan: TripPlan, expected_days: int):
+    if len(plan.itinerary) != expected_days:
+        raise ValueError(
+            f"Expected {expected_days} days, "
+            f"but got {len(plan.itinerary)}"
+        )
+
+    for index, day in enumerate(plan.itinerary, start=1):
+        if day.day != index:
+            raise ValueError(
+                f"Expected day {index}, got day {day.day}"
+            )
+
+        if not day.activities:
+            raise ValueError(
+                f"Day {day.day} has no activities"
+            )
+
+    return plan
 
 
 builder = StateGraph(TripState)

@@ -26,5 +26,5 @@ class TripResponse(BaseModel):
     weather: dict | None = None
     budget: float
     places: list[str] = []
-    itinerary: list[DayPlan]
+    itinerary: list[DayPlan] = []
     status: str
