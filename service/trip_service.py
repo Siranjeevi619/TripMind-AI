@@ -1,39 +1,8 @@
+from agent.trip_agent import trip_agent
 from api.schema.trip import TripRequest, TripResponse
+from database.plan_repository import trip_plan_repository
 from database.repository import trip_repository
 
-
-# class TripService:
-#     def create_trip(self, request: TripRequest) -> TripResponse:
-#         state = TripState(
-#             destination=request.destination,
-#             days=request.days,
-#             travelers=request.travelers,
-#             budget=request.budget,
-#         )
-# 
-#         prompt = f"""
-#                 Create a travel plan for:
-# 
-#                 Destination: {request.destination}
-#                 Days: {request.days}
-#                 Travelers: {request.travelers}
-#                 Budget: ${request.budget}
-#                 """
-# 
-#         result = run_agent(prompt, state=state)
-# 
-#         return TripResponse(
-#             trip_id="demo-123",
-#             destination=result.destination,
-#             days=request.days,
-#             travelers=request.travelers,
-#             itinerary=result.itinerary,
-#             budget=request.budget,
-#             places=state.places,
-#             weather=state.weather,
-#             status="created",
-#         )
-#
 
 class TripService:
 
@@ -43,7 +12,24 @@ class TripService:
             days=request.days,
             travelers=request.travelers,
             budget=request.budget,
-            status="created",
+            status="processing",
+        )
+
+        result = trip_agent.run(
+            destination=request.destination,
+            days=request.days,
+            travelers=request.travelers,
+            budget=request.budget,
+        )
+
+        trip_plan_repository.create_plan(
+            trip_id=trip.id,
+            weather=result.weather,
+            places=result.places,
+            itinerary=[
+                day.model_dump()
+                for day in result.itinerary
+            ],
         )
 
         return TripResponse(
@@ -51,8 +37,11 @@ class TripService:
             destination=trip.destination,
             days=trip.days,
             travelers=trip.travelers,
+            weather=result.weather,
             budget=trip.budget,
-            status=trip.status,
+            places=result.places,
+            itinerary=result.itinerary,
+            status="completed",
         )
 
 

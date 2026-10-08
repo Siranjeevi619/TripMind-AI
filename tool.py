@@ -5,6 +5,8 @@ from langchain_core.messages import ToolMessage, HumanMessage, SystemMessage
 from langchain_core.tools import tool
 from langchain_groq import ChatGroq
 
+from tools.weather import get_weather
+
 load_dotenv()
 
 
