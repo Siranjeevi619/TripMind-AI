@@ -1,31 +1,59 @@
-import uuid
+from uuid import UUID
 
-from langchain_core.messages import HumanMessage, AIMessage
+from langchain_core.messages import AIMessage, HumanMessage
+from sqlalchemy.orm import Session
 
-from app.ai.memory.store import conversation_store
-from app.ai.prompts.chat import chat_prompt
 from app.ai.llm import llm
+from app.ai.prompts.chat import chat_prompt
+from app.db.repositories import conversation_repository as repo
 
 
-async def chat(request: str, conversation_id : str) -> str:
+async def chat(message: str,db: Session,conversation_id: UUID | None = None) -> tuple[str, UUID]:
+    if conversation_id is None:
+        conversation = repo.create_conversation(db)
+        conversation_id = conversation.id
+    else:
+        conversation = repo.get_conversation(db, conversation_id)
+        if conversation is None:
+            raise ValueError("Conversation not found")
 
-    if  conversation_id is None:
-        conversation_id = str(uuid.uuid4())
+    history = repo.get_recent_messages(
+        db,
+        conversation_id,
+        limit=20,
+    )
 
-    history = conversation_store.setdefault(conversation_id, [])
+    repo.save_message(
+        db,
+        conversation_id,
+        "user",
+        message,
+    )
+
+    prompt_history = [
+        HumanMessage(content=item.content)
+        if item.role == "user"
+        else AIMessage(content=item.content)
+        for item in history
+        if item.role in {"user", "assistant"}
+    ]
 
     prompt_value = chat_prompt.invoke({
-        "message":request,
-        "history":history,
+        "message": message,
+        "history": prompt_history,
     })
 
+    try:
+        result = await llm.ainvoke(prompt_value)
+        response = str(result.content)
+    except Exception:
+        raise
 
-    result = await llm.ainvoke(prompt_value)
-    response =  str(result.content)
+    repo.save_message(
+        db,
+        conversation_id,
+        "assistant",
+        response,
+    )
 
-    history.extend([
-        HumanMessage(content=request),
-        AIMessage(content=response),
-    ])
     return response, conversation_id
-
