@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98cb7896-2dc4-43bf-a0a2-05c3055c5a7c" name="Changes" comment="" />
+    <list default="true" id="98cb7896-2dc4-43bf-a0a2-05c3055c5a7c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,63 +37,66 @@
     &quot;accountId&quot;: &quot;1b996e14-4bcf-43ec-ad00-ecd5e3f6572b&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app/api/routes/health.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.165240353851024" />
-      <entry key="MS500" value="2.454775050533886" />
-      <entry key="S2" value="7.460245957004228" />
-      <entry key="S5" value="14.557508597802864" />
-      <entry key="S10" value="21.02529143323303" />
-      <entry key="S30" value="29.585174308588584" />
-      <entry key="S60" value="36.37872738375968" />
-      <entry key="M2" value="46.463536797173205" />
-      <entry key="M5" value="60.22845619854252" />
-      <entry key="M10" value="73.0848823552329" />
-      <entry key="M15" value="91.22974025016181" />
-      <entry key="M30" value="172.16077666576956" />
-      <entry key="H1" value="319.4283074311676" />
-      <entry key="H2" value="474.39304843470626" />
-      <entry key="H4" value="589.7239919070788" />
-      <entry key="D1" value="713.5620930796645" />
-      <entry key="W1" value="737.8550847310571" />
+      <entry key="MS100" value="1.5683282547688062" />
+      <entry key="MS500" value="3.365988592566776" />
+      <entry key="S2" value="5.4983085496534265" />
+      <entry key="S5" value="6.321091970067447" />
+      <entry key="S10" value="6.645765063421602" />
+      <entry key="S30" value="6.8985019573002075" />
+      <entry key="S60" value="7.64653646515496" />
+      <entry key="M2" value="13.452593439439605" />
+      <entry key="M5" value="43.880438684770276" />
+      <entry key="M10" value="81.07000602993979" />
+      <entry key="M15" value="107.30998044052676" />
+      <entry key="M30" value="180.1513790673658" />
+      <entry key="H1" value="323.41471981241534" />
+      <entry key="H2" value="506.6413311617552" />
+      <entry key="H4" value="662.0658349145962" />
+      <entry key="D1" value="844.8695494454078" />
+      <entry key="W1" value="882.519777562324" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="2.473179660562212E-162" />
-      <entry key="S2" value="4.193320780977443E-41" />
-      <entry key="S5" value="9.153314898906655E-17" />
-      <entry key="S10" value="1.3815015691701994E-8" />
-      <entry key="S30" value="0.005120905929805754" />
-      <entry key="S60" value="0.13901713997207585" />
-      <entry key="M2" value="0.748237926875045" />
-      <entry key="M5" value="2.1959177923732587" />
-      <entry key="M10" value="3.691519100630605" />
-      <entry key="M15" value="5.446273332084552" />
-      <entry key="M30" value="12.660914132569834" />
-      <entry key="H1" value="25.53613004882728" />
-      <entry key="H2" value="38.97639110213786" />
-      <entry key="H4" value="48.925078735727745" />
-      <entry key="D1" value="59.563106815649164" />
-      <entry key="W1" value="61.64494892362488" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="2.2146234215062793E-176" />
+      <entry key="S10" value="2.1488798082788864E-88" />
+      <entry key="S30" value="1.2783027175029888E-29" />
+      <entry key="S60" value="6.945632594019342E-15" />
+      <entry key="M2" value="1.67248197767285E-7" />
+      <entry key="M5" value="0.004801144410265628" />
+      <entry key="M10" value="0.17261139626117084" />
+      <entry key="M15" value="0.7068745253074572" />
+      <entry key="M30" value="4.5612776806146185" />
+      <entry key="H1" value="15.327305216695116" />
+      <entry key="H2" value="30.19652633371653" />
+      <entry key="H4" value="43.06348908968637" />
+      <entry key="D1" value="58.3096304972205" />
+      <entry key="W1" value="61.45792853027028" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.1333950341467922" />
-      <entry key="MS500" value="2.441989714502699" />
-      <entry key="S2" value="7.45083547539345" />
-      <entry key="S5" value="14.550006894632379" />
-      <entry key="S10" value="21.019769385210402" />
-      <entry key="S30" value="29.58739256774762" />
-      <entry key="S60" value="36.512289994535834" />
-      <entry key="M2" value="47.19969379439887" />
-      <entry key="M5" value="62.40883291943706" />
-      <entry key="M10" value="76.76079599953012" />
-      <entry key="M15" value="96.6584012605462" />
-      <entry key="M30" value="184.79862811881384" />
-      <entry key="H1" value="344.9410880799893" />
-      <entry key="H2" value="513.3518652314461" />
-      <entry key="H4" value="638.6381493723106" />
-      <entry key="D1" value="773.1230046971417" />
-      <entry key="W1" value="799.4997096471449" />
+      <entry key="MS100" value="1.5283275278996624" />
+      <entry key="MS500" value="3.3487797405250865" />
+      <entry key="S2" value="5.491247095244935" />
+      <entry key="S5" value="6.317840390897561" />
+      <entry key="S10" value="6.644054942340885" />
+      <entry key="S30" value="6.8979096330871466" />
+      <entry key="S60" value="7.646199746606725" />
+      <entry key="M2" value="13.452258202701204" />
+      <entry key="M5" value="43.884715782633435" />
+      <entry key="M10" value="81.24144265606151" />
+      <entry key="M15" value="108.01420218113273" />
+      <entry key="M30" value="184.7041200159156" />
+      <entry key="H1" value="338.72788285177876" />
+      <entry key="H2" value="536.8241746443975" />
+      <entry key="H4" value="705.1196765500501" />
+      <entry key="D1" value="903.1770250324023" />
+      <entry key="W1" value="943.9773822205123" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -112,177 +117,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "dev-v2",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/home/steve/LLM/tripmind-ai",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev-v2&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/steve/LLM/tripmind-ai&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="DjangoTestsConfigurationType">
-      <module name="tripmind-ai" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="TARGET" value="" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <module name="tripmind-ai" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Python.Celery" factoryName="Python.Celery.App">
-      <module name="tripmind-ai" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Python.Celery" factoryName="Python.Celery.Task">
-      <module name="tripmind-ai" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Python.FlaskServer">
-      <module name="tripmind-ai" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <module name="tripmind-ai" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="docs" factoryName="Docutils task">
-      <module name="tripmind-ai" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="docutils_input_file" value="" />
-      <option name="docutils_output_file" value="" />
-      <option name="docutils_params" value="" />
-      <option name="docutils_task" value="" />
-      <option name="docutils_open_in_browser" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="docs" factoryName="Sphinx task">
-      <module name="tripmind-ai" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="docutils_input_file" value="" />
-      <option name="docutils_output_file" value="" />
-      <option name="docutils_params" value="" />
-      <option name="docutils_task" value="" />
-      <option name="docutils_open_in_browser" value="false" />
-      <method v="2" />
-    </configuration>
-  </component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -298,6 +155,7 @@
       <option name="presentableId" value="Default" />
       <updated>1791496642628</updated>
       <workItem from="1791496643634" duration="4506000" />
+      <workItem from="1791543387267" duration="912000" />
     </task>
     <servers />
   </component>
